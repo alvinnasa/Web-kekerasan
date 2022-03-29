@@ -14,7 +14,9 @@ class PelakuController extends Controller
      */
     public function index()
     {
-        $pelaku = pelaku::all();
+        $pelaku = pelaku::select('id_pelaku', 'nama_pelaku', 'alamat', 'kasuses.name')
+        ->join('kasuses','pelakus.id','=','kasuses.id')
+        ->get();
         return view('pelaku.index', compact('pelaku'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -51,7 +53,11 @@ class PelakuController extends Controller
      */
     public function show($id)
     {
-        //
+        $pelaku = pelaku::find($id);
+        
+
+
+        return view('pelaku.detail', compact('pelaku'));
     }
 
     /**
@@ -62,7 +68,9 @@ class PelakuController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pelaku = pelaku::find($id);
+        $idkas = kasus::all();
+        return view('pelaku.edit', compact('pelaku','idkas'));
     }
 
     /**
@@ -74,7 +82,11 @@ class PelakuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        pelaku::find($id)->update($request->all());
+
+        //jika data berhasil diupdate, akan kembali ke halaman utama
+        return redirect()->route('pelaku.index')
+            ->with('success', 'pelaku Berhasil Diupdate');
     }
 
     /**
@@ -85,6 +97,8 @@ class PelakuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        pelaku::find($id)->delete();
+        return redirect()->route('pelaku.index')
+            ->with('success', 'pelaku Berhasil Dihapus');
     }
 }

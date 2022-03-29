@@ -37,7 +37,7 @@ class UserController extends Controller
 
         //jika data berhasil ditambahkan, akan kembali ke halaman utama
         return redirect()->route('kasus.index')
-            ->with('success', 'User Berhasil Ditambahkan');
+            ->with('success', 'Kasus Berhasil Ditambahkan');
     }
 
     public function show(Request $request, $id)
@@ -72,7 +72,7 @@ class UserController extends Controller
 
         //jika data berhasil diupdate, akan kembali ke halaman utama
         return redirect()->route('kasus.index')
-            ->with('success', 'kasus Berhasil Diupdate');
+            ->with('success', 'Kasus Berhasil Diupdate');
     }
 
     public function destroy($id)
@@ -80,6 +80,6 @@ class UserController extends Controller
         //fungsi eloquent untuk menghapus data
         kasus::find($id)->delete();
         return redirect()->route('kasus.index')
-            ->with('success', 'User Berhasil Dihapus');
+            ->with('success', 'Kasus Berhasil Dihapus');
     }
 }

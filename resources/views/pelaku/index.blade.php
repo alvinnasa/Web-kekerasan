@@ -25,7 +25,7 @@
         <th>No</th>
         <th>ID Pelaku</th>
         <th>Nama Pelaku</th>
-        <th>ID Kasus</th>
+        <th>Kasus</th>
         <th>Alamat</th>
         </tr>
     </thead>
@@ -34,15 +34,15 @@
             <td>{{ ++$i }}</td>
             <td>{{ $pelaku->id_pelaku }}</td>
             <td>{{$pelaku->nama_pelaku }}</td>
-            <td>{{$pelaku->id }}</td>
+            <td>{{$pelaku->name}}</td>
             <td>{{ $pelaku->alamat }}</td>
 
             <td>
-                <form action="{{ route('korban.destroy',$pelaku->id_pelaku) }}" method="POST">
+                <form action="{{ route('pelaku.destroy',$pelaku->id_pelaku) }}" method="POST">
    
-                    <a class="btn btn-info" href="{{ route('korban.show',$pelaku->id_pelaku) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('pelaku.show',$pelaku->id_pelaku) }}">Show</a>
     
-                    <a class="btn btn-primary" href="{{ route('korban.edit',$pelaku->id_pelaku) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('pelaku.edit',$pelaku->id_pelaku) }}">Edit</a>
    
                     @csrf
                     @method('DELETE')

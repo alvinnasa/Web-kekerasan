@@ -6,7 +6,8 @@ use App\Models\kasus;
 use App\Models\pelayanan;
 use Illuminate\Http\Request;
 
-class KorbanController extends Controller
+
+class PelayananController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +16,10 @@ class KorbanController extends Controller
      */
     public function index()
     {
-        
-        $korban = korban::select('id_korban','nama_korban', 'alamat', 'kecamatan', 'kasuses.name','kabupaten','tgl_lahir','umur','hubungan','pendidikan','jenis_kelamin')
-        ->join('kasuses','korbans.id','=','kasuses.id')
+        $pelayanan = pelayanan::select('id_layanan','lembaga', 'pelayanan', 'keterangan', 'tgl_pelayanan', 'korbans.nama_korban')
+        ->join('korbans','pelayanans.id_korban','=','korbans.id_korban')
         ->get();
-       
-        return view('korban.index', compact('korban'))
+        return view('pelayanan.index', compact('pelayanan'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -30,9 +29,10 @@ class KorbanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        $idkas = kasus::all();
-        return view('korban.create',compact('idkas'));
+    {   
+        $idk = korban::all();
+     
+        return view('pelayanan.create',compact('idk'));
     }
 
     /**
@@ -43,9 +43,9 @@ class KorbanController extends Controller
      */
     public function store(Request $request)
     {
-        korban::create($request->all());
-        return redirect()->route('korban.index')
-        ->with('success', 'korban Berhasil Ditambahkan');
+        pelayanan::create($request->all());
+        return redirect()->route('pelayanan.index')
+        ->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -56,12 +56,7 @@ class KorbanController extends Controller
      */
     public function show($id)
     {
-        $korban = korban::find($id);
-        $pelayanan = pelayanan::where('id_korban', '=', $id)->get();
-       
-
-        return view('korban.detail', compact('korban','pelayanan'))
-        ->with('i', (request()->input('page', 1) - 1) * 5);
+        //
     }
 
     /**
@@ -72,9 +67,7 @@ class KorbanController extends Controller
      */
     public function edit($id)
     {
-        $korban = korban::find($id);
-        $idkas = kasus::all();
-        return view('korban.edit', compact('korban','idkas'));
+        //
     }
 
     /**
@@ -86,11 +79,7 @@ class KorbanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        korban::find($id)->update($request->all());
-
-        //jika data berhasil diupdate, akan kembali ke halaman utama
-        return redirect()->route('korban.index')
-            ->with('success', 'korban Berhasil Diupdate');
+        //
     }
 
     /**
@@ -101,8 +90,8 @@ class KorbanController extends Controller
      */
     public function destroy($id)
     {
-        korban::find($id)->delete();
-        return redirect()->route('korban.index')
-            ->with('success', 'korban Berhasil Dihapus');
+        pelayanan::find($id)->delete();
+        return redirect()->route('pelayanan.index')
+            ->with('success', 'Data Berhasil Dihapus');
     }
 }

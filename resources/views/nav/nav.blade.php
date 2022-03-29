@@ -22,9 +22,9 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Pelaku Center
                             </a>
-                            <a class="nav-link" href="{{url('s-admin/user_center')}}">
+                            <a class="nav-link" href="{{url('pelayanan')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Layanan Korban Center
+                                Layanan Korban 
                             </a>
                         </div>
                     </div>

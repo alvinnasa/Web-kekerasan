@@ -41,7 +41,7 @@
         <tr>
             <td>{{ ++$i }}</td>
             <td>{{ $korban->id_korban }}</td>
-            <td>{{$korban->id }}</td>
+            <td>{{$korban->name }}</td>
             <td>{{ $korban->nama_korban }}</td>
             <td>{{ $korban->alamat }}</td>
             <td>{{ $korban->kecamatan }}</td>
