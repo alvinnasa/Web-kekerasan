@@ -19,8 +19,10 @@ class PelayananController extends Controller
         $pelayanan = pelayanan::select('id_layanan','lembaga', 'pelayanan', 'keterangan', 'tgl_pelayanan', 'korbans.nama_korban')
         ->join('korbans','pelayanans.id_korban','=','korbans.id_korban')
         ->get();
+        
         return view('pelayanan.index', compact('pelayanan'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
+            
     }
 
     /**
@@ -67,7 +69,9 @@ class PelayananController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pelayanan = pelayanan::find($id);
+        $idkor = korban::all();
+        return view('pelayanan.edit', compact('pelayanan','idkor'));
     }
 
     /**
@@ -79,7 +83,11 @@ class PelayananController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        pelayanan::find($id)->update($request->all());
+
+        //jika data berhasil diupdate, akan kembali ke halaman utama
+        return redirect()->route('pelayanan.index')
+            ->with('success', 'DATA Berhasil Diupdate');
     }
 
     /**

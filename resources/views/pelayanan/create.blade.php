@@ -50,7 +50,7 @@
                                 <option disable value>Pilih Korban</option>                
                                 @foreach ($idk as $idk)
                                 
-                                <option value="{{$idk->id}}">{{$idk->nama_korban}}</option>        
+                                <option value="{{$idk->id_korban}}">{{$idk->nama_korban}}</option>        
                              
                                 @endforeach     
                                 </select>           
